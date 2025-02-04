@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "742320751963",
+    "project_id": "msub-5fa4f",
+    "storage_bucket": "msub-5fa4f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742320751963:android:bddd19074cfc296d3b867e",
+        "android_client_info": {
+          "package_name": "com.app.msub.msub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA5n1lt7pA2Hg8JUYRt-6rDBTEiMXi6jM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
