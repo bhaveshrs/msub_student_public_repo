@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msub/common/utils/app_colors.dart';
@@ -9,20 +7,21 @@ import 'package:msub/view/dashboard/home/view/help_support_view.dart';
 import 'package:msub/view/dashboard/home/view/profile_view.dart';
 import 'package:msub/view/dashboard/home/view/search_view.dart';
 import 'package:msub/widgets/size_space.dart';
+
 import '../../../../common/utils/assets.dart';
 import '../../../../widgets/custom_text.dart';
 import '../../../notification/view/notification_view.dart';
 import '../controller/home_controller.dart';
 
 class HomeView extends StatefulWidget {
-
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin {
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
   final HomeController controller = Get.put(HomeController());
   late AnimationController _controller;
   late Animation<double> _containerHeight;
@@ -47,8 +46,9 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    _slideAnimation = Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0))
-        .animate(
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0))
+            .animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
   }
@@ -184,10 +184,13 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                           GestureDetector(
                             onTap: () {
                               // Toggle the "showAll" flag
-                              controller.showAll.value = !controller.showAll.value;
+                              controller.showAll.value =
+                                  !controller.showAll.value;
                             },
                             child: Obx(() => Text(
-                                  controller.showAll.value ? "Show Less" : "More",
+                                  controller.showAll.value
+                                      ? "Show Less"
+                                      : "More",
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.blue,
@@ -201,13 +204,16 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                       Obx(() => GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
                               childAspectRatio: 1,
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 8,
                             ),
-                            itemCount: controller.showAll.value ? controller.items.length : 8,
+                            itemCount: controller.showAll.value
+                                ? controller.items.length
+                                : 8,
                             itemBuilder: (context, index) {
                               if (index == 8) {
                                 return AnimatedOpacity(
@@ -225,9 +231,9 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                                 controller.items[index],
                                 () {
                                   // Handle navigation
-                                  if (controller.items[index]['title'] == 'Faculties') {
+                                  if (controller.items[index]['title'] ==
+                                      'Faculties') {
                                     Get.to(() => FacilitiesView());
-
                                   }
                                 },
                               );
@@ -264,7 +270,8 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                         itemCount: controller.lineColors.length,
                         itemBuilder: (context, index) {
                           return Card(
-                            margin: EdgeInsets.only(bottom: screenHeight * 0.01),
+                            margin:
+                                EdgeInsets.only(bottom: screenHeight * 0.01),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -280,7 +287,8 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                                 const Width(width: 10),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const CustomText(
                                         "Exam Results Published",
@@ -304,7 +312,8 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
 
                       const Height(height: 20),
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Container(
                           decoration: const BoxDecoration(
                             color: Colors.white,
@@ -336,7 +345,8 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                       ),
                       const Height(height: 20),
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Container(
                           decoration: const BoxDecoration(
                             color: Colors.white,
@@ -362,7 +372,8 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                       ),
                       const Height(height: 20),
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Container(
                           decoration: const BoxDecoration(
                             color: Colors.white,
@@ -396,20 +407,27 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                       const Height(height: 30),
 
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(25)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25)),
                         child: Container(
                             height: 160,
-                            padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 13),
-                            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 21, vertical: 13),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 12),
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage(Assets.helpSupportImg), fit: BoxFit.fill),
+                                image: DecorationImage(
+                                    image: AssetImage(Assets.helpSupportImg),
+                                    fit: BoxFit.fill),
                                 color: AppColors.primary,
-                                borderRadius: const BorderRadius.all(Radius.circular(40))),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(40))),
                             child: Row(
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const CustomText(
                                         "Help & Support",
@@ -430,9 +448,13 @@ class _HomeViewState extends State<HomeView>with SingleTickerProviderStateMixin 
                                           Get.to(() => HelpSupportView());
                                         },
                                         child: Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 8),
                                           decoration: BoxDecoration(
-                                              color: AppColors.white.withOpacity(0.20), borderRadius: BorderRadius.circular(8)),
+                                              color: AppColors.white
+                                                  .withOpacity(0.20),
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
                                           child: const CustomText(
                                             "Contact Support",
                                             color: Colors.white,
@@ -634,14 +656,19 @@ class NotesWidgets extends StatelessWidget {
   final String txt2;
   final bool selected;
 
-  const NotesWidgets({super.key, required this.txt1, required this.txt2, this.selected = false});
+  const NotesWidgets(
+      {super.key,
+      required this.txt1,
+      required this.txt2,
+      this.selected = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
-      decoration:
-          BoxDecoration(color: selected ? AppColors.primary : Colors.white, borderRadius: const BorderRadius.all(Radius.circular(6))),
+      decoration: BoxDecoration(
+          color: selected ? AppColors.primary : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(6))),
       child: Column(
         children: [
           CustomText(
@@ -653,7 +680,9 @@ class NotesWidgets extends StatelessWidget {
           const SizedBox(
             height: 3,
           ),
-          CustomText(txt2, fontSize: 14, color: selected ? AppColors.white : AppColors.black),
+          CustomText(txt2,
+              fontSize: 14,
+              color: selected ? AppColors.white : AppColors.black),
         ],
       ),
     );

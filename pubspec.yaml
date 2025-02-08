@@ -9,7 +9,7 @@ environment:
   sdk: ^3.5.3
 
 dependencies:
-  shared_preferences: ^2.0.20
+  # shared_preferences: ^2.0.20
   get: ^4.6.5
   http: ^1.2.2
   responsive_framework: ^0.2.0
@@ -40,6 +40,17 @@ dependencies:
   device_info_plus: ^11.2.0
   firebase_messaging: ^15.1.6
   flutter_local_notifications: ^18.0.1
+  shared_preferences: ^2.5.1
+  flutter_secure_storage: ^9.2.4
+  go_router: ^14.7.2
+  dio: ^5.8.0+1
+  fluttertoast: ^8.2.11
+  shimmer: ^3.0.0
+  flutter_svg: ^2.0.17
+  flutter_bloc: ^9.0.0
+  equatable: ^2.0.7
+  formz: ^0.8.0
+  pinput: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -61,30 +72,43 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets_new/images/
+    - assets_new/svgs/
 #    - assets/svgs/
 
   fonts:
-    - family: KoHo
-      fonts:
-        - asset: assets/fonts/KoHo-Light.ttf
-          weight: 300
-        - asset: assets/fonts/KoHo-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/KoHo-Bold.ttf
-          weight: 700
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 700
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-Medium.ttf
-          weight: 300
-        - asset: assets/fonts/Roboto-Medium.ttf
-          weight: 400
-        - asset: assets/fonts/Roboto-Medium.ttf
-          weight: 700
+      - family: Roboto # Font family name for Roboto
+        fonts:
+          - asset: assets_new/fonts/Roboto-Regular.ttf
+            weight: 400
+          - asset: assets_new/fonts/Roboto-Bold.ttf
+            weight: 700
+          - asset: assets_new/fonts/Roboto-Light.ttf
+            weight: 300
+          - asset: assets_new/fonts/Roboto-Medium.ttf
+            weight: 500
+
+      - family: KoHo # Font family name for KoHo
+        fonts:
+          - asset: assets_new/fonts/KoHo-Regular.ttf
+            weight: 400
+          - asset: assets_new/fonts/KoHo-Bold.ttf
+            weight: 700
+          - asset: assets_new/fonts/KoHo-Light.ttf
+            weight: 300
+          - asset: assets_new/fonts/KoHo-Medium.ttf
+            weight: 500
+          - asset: assets_new/fonts/KoHo-SemiBold.ttf
+            weight: 600
+            
+      - family: Poppins # Font family name for KoHo
+        fonts:
+          - asset: assets_new/fonts/Poppins-ExtraLight.ttf
+            weight: 200
+          - asset: assets_new/fonts/Poppins-Regular.ttf
+            weight: 400
+          - asset: assets_new/fonts/Poppins-SemiBold.ttf
+            weight: 600
+          - asset: assets_new/fonts/Poppins-Medium.ttf
+            weight: 500
+           

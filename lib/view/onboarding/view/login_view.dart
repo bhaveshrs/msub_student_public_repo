@@ -29,7 +29,8 @@ class LoginView extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
+              child:
+               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Height(height: Get.height * .10),
@@ -54,8 +55,10 @@ class LoginView extends StatelessWidget {
                   top: Radius.circular(40),
                 ),
               ),
-              child: SingleChildScrollView(
-                child: Column(
+              child:
+               SingleChildScrollView(
+                child: 
+                Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Height(height: 50),

@@ -1,0 +1,3 @@
+class NetworkExceptions {
+  const NetworkExceptions();
+}

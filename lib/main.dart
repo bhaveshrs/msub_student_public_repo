@@ -3,15 +3,42 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:msub/view/dashboard/dashboard_view.dart';
-import 'package:msub/view/onboarding/view/complete_profile_view.dart';
-import 'package:msub/view/onboarding/view/sign_up_verify_view.dart';
+import 'package:msub/app.dart';
+import 'package:msub/common/utils/app_colors.dart';
+import 'package:msub/config/firbase_utils/firebase_options.dart';
 import 'package:msub/view/onboarding/view/splash_view.dart';
-import 'package:msub/view/onboarding/view/terms_conditions_view.dart';
-import 'common/utils/app_colors.dart';
-import 'firebase_options.dart';
 
-Future<void> main() async {
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  final String? msgTitle = message.notification!.title;
+  final String? msgBody = message.notification!.body;
+  if (msgTitle != null && msgBody != null) {
+    print("Handling a background message: ${message.messageId}");
+    print("onBackgroundMessage $message");
+  }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(const MyApp());
+}
+
+
+
+Future<void> main2() async {
   runApp(const msub());
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -20,7 +47,8 @@ Future<void> main() async {
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: AppColors.white,
@@ -33,17 +61,17 @@ Future<void> main() async {
   runApp(const msub());
 }
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // await Firebase.initializeApp();
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   // await Firebase.initializeApp();
 
-  print(message);
-  final String? msgTitle = message.notification!.title;
-  final String? msgBody = message.notification!.body;
-  if (msgTitle != null && msgBody != null) {
-    print("Handling a background message: ${message.messageId}");
-    print("onBackgroundMessage $message");
-  }
-}
+//   print(message);
+//   final String? msgTitle = message.notification!.title;
+//   final String? msgBody = message.notification!.body;
+//   if (msgTitle != null && msgBody != null) {
+//     print("Handling a background message: ${message.messageId}");
+//     print("onBackgroundMessage $message");
+//   }
+// }
 
 class msub extends StatelessWidget {
   const msub({super.key});
@@ -81,7 +109,9 @@ class msub extends StatelessWidget {
           primarySwatch: primary,
           scaffoldBackgroundColor: const Color(0xffffffff),
           fontFamily: "KoHo",
-        ).copyWith(colorScheme: ThemeData().colorScheme.copyWith(primary: AppColors.primary)),
+        ).copyWith(
+            colorScheme:
+                ThemeData().colorScheme.copyWith(primary: AppColors.primary)),
         home: SplashView());
   }
 }
