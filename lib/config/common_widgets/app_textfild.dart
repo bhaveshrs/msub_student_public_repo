@@ -13,7 +13,7 @@ class CustomTextInput extends StatelessWidget {
   final TextEditingController controller;
   final String? labelText;
   final String? hintText;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final FloatingLabelBehavior? floatingLabelBehavior;
@@ -43,7 +43,7 @@ class CustomTextInput extends StatelessWidget {
       this.labelText,
       this.hintText,
       this.labelColor,
-      required this.keyboardType,
+       this.keyboardType,
       this.prefixIcon,
       this.floatingLabelBehavior,
       this.validator,
@@ -116,7 +116,7 @@ class CustomTextInput extends StatelessWidget {
                   )
                 : null,
             hintText: hintText,
-            suffixIcon: suffixIcon,
+            suffix: suffixIcon,
             contentPadding: EdgeInsets.all(contentPadValue ?? 9),
             labelStyle: const TextStyle(fontSize: 16, color: MyAppColors.black),
             hintStyle: AppTextStyles.pop15Reg(color: MyAppColors.inActiveText),

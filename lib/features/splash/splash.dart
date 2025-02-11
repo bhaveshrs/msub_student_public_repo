@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (remainingTime > 0) {
       await Future.delayed(Duration(milliseconds: remainingTime));
     }
-    context.go(AppRouteNames.onboardingRoute);
+    // context.go(AppRouteNames.onboardingRoute);
 
     // if (token == null || token.isEmpty) {
     //   context.go(AppRouteNames.onboardingRoute);
@@ -45,11 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // }
     // String? token = await StorageService().getSessionToken();
     // print(token);
-    // if (token == null || token.isEmpty) {
-    //   context.go(AppRouteNames.signinRoute);
-    // } else {
-    //   context.go(AppRouteNames.dashboardRoute);
-    // }
+   
   }
 
   @override

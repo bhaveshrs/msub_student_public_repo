@@ -46,14 +46,18 @@ class AppButton extends StatelessWidget {
             Expanded(
               child: Visibility(
                 visible: !loading,
-                replacement: const Center(
-                    child: SizedBox(
-                  height: 25,
-                  width: 25,
-                  child: CircularProgressIndicator(
-                    color: MyAppColors.white,
-                  ),
-                )),
+                replacement: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: CircularProgressIndicator(
+                        color: MyAppColors.white,
+                      ),
+                    ),
+                  ],
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,

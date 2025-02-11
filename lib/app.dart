@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msub/config/resource/app_theme.dart';
 import 'package:msub/config/router/routes.dart';
+import 'package:msub/features/complete_profile/bloc/complete_profile_bloc.dart';
 import 'package:msub/features/signin/bloc/register_bloc.dart';
+import 'package:msub/features/signup/bloc/sign_up_bloc.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -34,6 +36,12 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(
           create: (context) => SignInBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SignUpBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CompleteProfileBloc(),
         ),
         // BlocProvider(
         //   create: (context) => CalenderBloc(),

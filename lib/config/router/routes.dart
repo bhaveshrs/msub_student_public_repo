@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:msub/config/router/error_route_screen.dart';
 import 'package:msub/config/router/route_names.dart';
+import 'package:msub/features/complete_profile/complete_profile_view.dart';
 import 'package:msub/features/forgot_pass/forgot_pass.dart';
 import 'package:msub/features/onboarding/onbaording.dart';
 import 'package:msub/features/signin/signin.dart';
+import 'package:msub/features/signup/sign_up_view.dart';
+import 'package:msub/features/signup_verify/sign_up_verify.dart';
 import 'package:msub/features/splash/splash.dart';
+import 'package:msub/features/term_and_condition/term_and_condition.dart';
 import 'package:msub/features/welcome/welcome.dart';
 import 'package:msub/view/dashboard/dashboard_view.dart';
 // import 'package:teachers_app/config/router/error_route_screen.dart';
@@ -85,6 +89,14 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: AppRouteNames.signUpRoute,
+        name: AppRouteNames.signUpRoute,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SignUp(),
+        ),
+      ),
+      GoRoute(
         path: AppRouteNames.forgotPassRoute,
         name: AppRouteNames.forgotPassRoute,
         pageBuilder: (context, state) => MaterialPage(
@@ -92,6 +104,44 @@ class AppRouter {
           child: const ForgotPass(),
         ),
       ),
+      GoRoute(
+          path: AppRouteNames.signUpVerifyRoute,
+          name: AppRouteNames.signUpVerifyRoute,
+          pageBuilder: (context, state) {
+            final extra = state.extra as Map?;
+            return MaterialPage(
+              key: state.pageKey,
+              child: SignUpVerifyView(
+                prnNumber: extra?['prnNumber'] as String,
+              ),
+            );
+          }),
+      GoRoute(
+          path: AppRouteNames.termConditionsRoute,
+          name: AppRouteNames.termConditionsRoute,
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const ConductAgreementScreen(),
+            );
+          }),
+      GoRoute(
+          path: AppRouteNames.completeProfileRoute,
+          name: AppRouteNames.completeProfileRoute,
+          pageBuilder: (context, state) {
+            final extra = state.extra as Map?;
+            return MaterialPage(
+              key: state.pageKey,
+              child: CompleteProfileScreen(
+                name: extra?['name'] as String,
+              ),
+            );
+          }),
+      //   return MaterialPage(
+      //     key: state.pageKey,
+      //     child: const CompleteProfileScreen(),
+      //   );
+      // }),
       // GoRoute(
       //   path: AppRouteNames.createNewPassRoute,
       //   name: AppRouteNames.createNewPassRoute,

@@ -4,6 +4,10 @@ class AppRouteNames {
   static const String welcomeRoute = '/welcomeScreenRoute';
 
   static const String signinRoute = '/sign-in';
+  static const String signUpRoute = '/sign-up';
+  static const String signUpVerifyRoute = '/sign-verify';
+  static const String termConditionsRoute = '/terms-condition';
+  static const String completeProfileRoute = '/completeProfile';
   static const String forgotPassRoute = '/forgotPass';
   static const String createNewPassRoute = '/create-newPass';
   // static const String homeRoute = '/home';

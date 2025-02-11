@@ -79,6 +79,7 @@ class WelcomeHome extends StatelessWidget {
               buttonColor: Colors.white,
               textStyle: AppTextStyles.pop14Semi(color: MyAppColors.blue3),
               onPress: () {
+                context.pushNamed(AppRouteNames.signUpRoute);
                 // Get.to(SignUpView());
               },
               buttonName: "Sign Up",

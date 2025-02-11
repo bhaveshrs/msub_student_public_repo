@@ -1,10 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-
+import 'package:msub/common/utils/app_colors.dart';
 import 'package:msub/config/common_widgets/apptext.dart';
 import 'package:msub/config/resource/app_colors.dart';
 import 'package:msub/config/resource/app_textstyles.dart';
-
 
 class CommonDropdown extends StatelessWidget {
   final List<String> items;
@@ -38,7 +37,7 @@ class CommonDropdown extends StatelessWidget {
     this.hintStyle,
     this.itemTextStyle,
     this.dropdownIcon =
-        const Icon(Icons.keyboard_arrow_down_outlined, size: 16),
+        const Icon(Icons.keyboard_arrow_down_outlined, size: 25, color: MyAppColors.inActiveText,),
     this.buttonPadding,
     this.buttonDecoration,
     this.dropdownDecoration,
@@ -70,10 +69,16 @@ class CommonDropdown extends StatelessWidget {
             String item = entry.value;
             return DropdownMenuItem<String>(
               value: item,
-              child: FittedBox(
-                child: Text(item,
-                    style: dynamicItemTextStyle?.call(index, item) ??
-                        AppTextStyles.pop14Reg()),
+              child: Container(
+                height: menuItemHeight, // Fix height to prevent overflow
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  item,
+                  style: itemTextStyle ?? AppTextStyles.pop14Reg(),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis, // Prevents text cutoff
+                ),
               ),
             );
           }).toList(),

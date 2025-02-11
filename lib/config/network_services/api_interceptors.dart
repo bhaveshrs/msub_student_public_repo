@@ -30,7 +30,7 @@ class ApiInterceptors {
 
         if (response.statusCode == 200 && data['status'] == "success") {
           response.data = ApiResult.success(
-            data: (data as Map ).containsKey('data') ?  data['data'] : data,
+            data: (data as Map).containsKey('data') ? data['data'] : data,
             message: data['message'],
           );
         } else {
