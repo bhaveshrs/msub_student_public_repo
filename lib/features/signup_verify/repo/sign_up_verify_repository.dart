@@ -1,5 +1,6 @@
 import 'package:msub/config/network_services/api_result.dart';
 import 'package:msub/config/network_services/api_result_service.dart';
+import 'package:msub/features/signup_verify/models/set_user_response.dart';
 import 'package:msub/features/signup_verify/service/sign_up_verify_service.dart';
 
 class SignUpVerifyRepository {
@@ -91,9 +92,13 @@ class SignUpVerifyRepository {
       }));
 
       if (response is ApiSuccess) {
-        return RepoSuccess(message: response.message, data: response.data);
+        SetUserResponse setUserResponse =
+            SetUserResponse.fromMap(response.data);
+        return RepoSuccess(message: response.message, data: setUserResponse);
       } else {
-        return RepoFailure(error: (response as ApiFailure).errorMsg, );
+        return RepoFailure(
+          error: (response as ApiFailure).errorMsg,
+        );
       }
     } catch (_) {
       return RepoFailure(error: _.toString());

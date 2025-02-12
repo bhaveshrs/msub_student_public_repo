@@ -59,7 +59,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
     final hasSpecialCharacter = RegExp(r'[!@#$%^&*(),.?":{}|<>]')
         .hasMatch(password); // At least one special char
 
-    return hasUppercase  && hasNumber && hasSpecialCharacter;
+    return hasUppercase && hasNumber && hasSpecialCharacter;
   }
 
   final defaultPinTheme = PinTheme(

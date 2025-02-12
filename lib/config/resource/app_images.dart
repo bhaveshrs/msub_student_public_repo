@@ -44,8 +44,10 @@ class AppImages {
   static String exam = 'assets_new/images/exam.png';
   static String milestone = 'assets_new/images/milestone.png';
   static String events = 'assets_new/images/events.png';
-  static String services = 'assets_new/images/services.png';
+  static String services = 'assets_new/images/services_1.png';
   static String sports = 'assets_new/images/sports.png';
+  static String assignments = 'assets_new/images/assignments.png';
+  static String academic = 'assets_new/images/academic.png';
   static String edit = 'assets_new/svgs/edit.svg';
   static String roomNumSvg = 'assets_new/svgs/room_number.svg';
   static String copySvg = 'assets_new/svgs/copy.svg';

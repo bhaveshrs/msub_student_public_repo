@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:msub/config/common_widgets/tost_msg.dart';
 import 'package:msub/config/network_services/api_result_service.dart';
+import 'package:msub/config/resource/storage_service.dart';
 import 'package:msub/features/complete_profile/models/country_model.dart';
 import 'package:msub/features/complete_profile/models/program_model.dart';
 import 'package:msub/features/complete_profile/models/year_model.dart';
@@ -36,32 +37,37 @@ class CompleteProfileBloc
 
       try {
         // String? token = await StorageService().getSessionToken();
-        String? token =
-            "A9TzpSLEmsBytqNZBvyA2Eab9P8c9qD57CIUtMsSTirhJbZoQcwkfpqfr36u";
-        RepoResult countriesResult = await repository.fetchCountries(
-            payload: json.encode({'token': token}));
-        RepoResult programmesResult = await repository.fetchProgrammes(
-            payload: json.encode({'token': token}));
-        RepoResult yearsResult =
-            await repository.fetchYears(payload: json.encode({'token': token}));
-        print(countriesResult);
-        print(programmesResult);
-        print(yearsResult);
+        String? token = await StorageService().getSessionToken();
+        if (token != null) {
+          RepoResult countriesResult = await repository.fetchCountries(
+              payload: json.encode({'token': token}));
+          RepoResult programmesResult = await repository.fetchProgrammes(
+              payload: json.encode({'token': token}));
+          RepoResult yearsResult = await repository.fetchYears(
+              payload: json.encode({'token': token}));
+          print(countriesResult);
+          print(programmesResult);
+          print(yearsResult);
 
-        if (countriesResult is RepoSuccess &&
-            programmesResult is RepoSuccess &&
-            yearsResult is RepoSuccess) {
-          List<CountryModel> countries = countriesResult.data;
-          List<ProgramModel> programs = programmesResult.data;
-          List<YearModel> years = yearsResult.data;
+          if (countriesResult is RepoSuccess &&
+              programmesResult is RepoSuccess &&
+              yearsResult is RepoSuccess) {
+            List<CountryModel> countries = countriesResult.data;
+            List<ProgramModel> programs = programmesResult.data;
+            List<YearModel> years = yearsResult.data;
 
-          emit(state.copyWith(
-            status: FormzSubmissionStatus.success,
-            countries: List.from(state.countries)..addAll(countries),
-            programmes: List.from(state.programmes)..addAll(programs),
-            years: List.from(state.years)..addAll(years),
-          ));
-          print(List.from(state.countries)..addAll(countries));
+            emit(state.copyWith(
+              status: FormzSubmissionStatus.success,
+              countries: List.from(state.countries)..addAll(countries),
+              programmes: List.from(state.programmes)..addAll(programs),
+              years: List.from(state.years)..addAll(years),
+            ));
+            print(List.from(state.countries)..addAll(countries));
+          } else {
+            emit(state.copyWith(
+                status: FormzSubmissionStatus.failure,
+                errorMessage: "Failed to fetch data"));
+          }
         } else {
           emit(state.copyWith(
               status: FormzSubmissionStatus.failure,
@@ -100,57 +106,61 @@ class CompleteProfileBloc
           completeProfileStatus: FormzSubmissionStatus.inProgress));
 
       try {
-        String? token =
-            "A9TzpSLEmsBytqNZBvyA2Eab9P8c9qD57CIUtMsSTirhJbZoQcwkfpqfr36u";
+        String? token = await StorageService().getSessionToken();
 
         String? uploadedFileUrl;
 
         // 1️⃣ Upload file if selected
-        // if (event.file != null) {
-        RepoResult profileResult = await repository.uploadFile(
-            file: event.file,
-            token: token,
-            name: event.name,
-            gender: event.selectedGender,
-            permanentAddress: "Address",
-            countryId: event.selectedCountry,
-            dob: event.dob,
-            nationalityId: event.selectedNationality,
-            courseId: event.selectedProgramme,
-            year: event.selectedYear);
+        if (token != null) {
+          RepoResult profileResult = await repository.uploadFile(
+              file: event.file,
+              token: token,
+              name: event.name,
+              gender: event.selectedGender,
+              permanentAddress: "Address",
+              countryId: event.selectedCountry,
+              dob: event.dob,
+              nationalityId: event.selectedNationality,
+              courseId: event.selectedProgramme,
+              year: event.selectedYear);
 
-        // if (uploadResult is RepoSuccess) {
+          // if (uploadResult is RepoSuccess) {
 
-        // } else if (uploadResult is RepoFailure) {
-        //   emit(state.copyWith(
-        //       status: FormzSubmissionStatus.failure,
-        //       errorMessage: uploadResult.error));
-        //   showCustomToast("File upload failed: ${uploadResult.error}", false);
-        //   return;
-        // }
-        // }
-        // String? token = await StorageService().getSessionToken();
+          // } else if (uploadResult is RepoFailure) {
+          //   emit(state.copyWith(
+          //       status: FormzSubmissionStatus.failure,
+          //       errorMessage: uploadResult.error));
+          //   showCustomToast("File upload failed: ${uploadResult.error}", false);
+          //   return;
+          // }
+          // }
+          // String? token = await StorageService().getSessionToken();
 
-        // 2️⃣ Call Student Registration API with File URL (if uploaded)
-        // final profileData = {
-        //   ...event.profileData,
-        //   'token': token,
-        //   if (uploadedFileUrl != null)
-        //     "image_url":
-        //         uploadedFileUrl, // Attach uploaded file URL if available
-        // };
+          // 2️⃣ Call Student Registration API with File URL (if uploaded)
+          // final profileData = {
+          //   ...event.profileData,
+          //   'token': token,
+          //   if (uploadedFileUrl != null)
+          //     "image_url":
+          //         uploadedFileUrl, // Attach uploaded file URL if available
+          // };
 
-        // final profileResult =
-        //     await repository.submitProfile(payload: json.encode(profileData));
-        if (profileResult is RepoSuccess) {
-          emit(state.copyWith(
-              completeProfileStatus: FormzSubmissionStatus.success));
-          showCustomToast("Profile Completed Successfully!", true);
-        } else if (profileResult is RepoFailure) {
+          // final profileResult =
+          //     await repository.submitProfile(payload: json.encode(profileData));
+          if (profileResult is RepoSuccess) {
+            emit(state.copyWith(
+                completeProfileStatus: FormzSubmissionStatus.success));
+            showCustomToast("Profile Completed Successfully!", true);
+          } else if (profileResult is RepoFailure) {
+            emit(state.copyWith(
+                completeProfileStatus: FormzSubmissionStatus.failure,
+                errorMessage: profileResult.error));
+            showCustomToast(profileResult.error, false);
+          }
+        } else {
           emit(state.copyWith(
               completeProfileStatus: FormzSubmissionStatus.failure,
-              errorMessage: profileResult.error));
-          showCustomToast(profileResult.error, false);
+              errorMessage: "Something went wrong"));
         }
       } catch (e) {
         emit(state.copyWith(

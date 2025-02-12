@@ -196,6 +196,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:msub/common/utils/image_select.dart';
 import 'package:msub/config/common_widgets/app_dropdown.dart';
 import 'package:msub/config/common_widgets/button.dart';
@@ -203,6 +204,7 @@ import 'package:msub/config/common_widgets/tost_msg.dart';
 import 'package:msub/config/resource/app_colors.dart';
 import 'package:msub/config/resource/app_images.dart';
 import 'package:msub/config/resource/app_textstyles.dart';
+import 'package:msub/config/router/route_names.dart';
 import 'package:msub/features/complete_profile/bloc/complete_profile_bloc.dart';
 import 'package:msub/features/complete_profile/models/country_model.dart';
 import 'package:msub/features/complete_profile/models/program_model.dart';
@@ -211,7 +213,7 @@ import '../../config/common_widgets/app_textfild.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   final String? name;
-  const CompleteProfileScreen({super.key,  this.name});
+  const CompleteProfileScreen({super.key, this.name});
 
   @override
   _CompleteProfileViewState createState() => _CompleteProfileViewState();
@@ -302,21 +304,16 @@ class _CompleteProfileViewState extends State<CompleteProfileScreen> {
       body: SafeArea(
         child: BlocConsumer<CompleteProfileBloc, CompleteProfileState>(
           listener: (context, state) {
-            print(state.completeProfileStatus);
-            print("state.status");
             if (state.completeProfileStatus == FormzSubmissionStatus.success) {
+              context.go(AppRouteNames.dashboardRoute);
               showCustomToast("Profile Completed Successfully!", true);
             } else if (state.completeProfileStatus ==
                 FormzSubmissionStatus.failure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                    content:
-                        Text(state.errorMessage ?? "Something went wrong")),
-              );
+              showCustomToast(
+                  state.errorMessage ?? "Something went wrong", true);
             }
           },
           builder: (context, state) {
-            print(state.countries);
             if (state.status == FormzSubmissionStatus.inProgress) {
               return const Center(child: CircularProgressIndicator());
             } else {

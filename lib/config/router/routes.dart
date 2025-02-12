@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:msub/config/router/error_route_screen.dart';
 import 'package:msub/config/router/route_names.dart';
 import 'package:msub/features/complete_profile/complete_profile_view.dart';
+import 'package:msub/features/dashboard/dashbord.dart';
 import 'package:msub/features/forgot_pass/forgot_pass.dart';
 import 'package:msub/features/onboarding/onbaording.dart';
 import 'package:msub/features/signin/signin.dart';
@@ -11,7 +12,6 @@ import 'package:msub/features/signup_verify/sign_up_verify.dart';
 import 'package:msub/features/splash/splash.dart';
 import 'package:msub/features/term_and_condition/term_and_condition.dart';
 import 'package:msub/features/welcome/welcome.dart';
-import 'package:msub/view/dashboard/dashboard_view.dart';
 // import 'package:teachers_app/config/router/error_route_screen.dart';
 // import 'package:teachers_app/config/router/route_names.dart';
 // import 'package:teachers_app/features/announcement/announcement.dart';
@@ -132,9 +132,7 @@ class AppRouter {
             final extra = state.extra as Map?;
             return MaterialPage(
               key: state.pageKey,
-              child: CompleteProfileScreen(
-                name: extra?['name'] as String,
-              ),
+              child: CompleteProfileScreen(name: extra?['email'] as String?),
             );
           }),
       //   return MaterialPage(
@@ -159,7 +157,7 @@ class AppRouter {
         name: AppRouteNames.dashboardRoute,
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child: const DashboardView(),
+          child: const DashBoard(),
         ),
       ),
       // GoRoute(

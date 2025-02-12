@@ -38,14 +38,13 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     // context.go(AppRouteNames.onboardingRoute);
 
-    // if (token == null || token.isEmpty) {
-    //   context.go(AppRouteNames.onboardingRoute);
-    // } else {
-    //   context.go(AppRouteNames.dashboardRoute);
-    // }
+    if (token == null || token.isEmpty) {
+      context.go(AppRouteNames.onboardingRoute);
+    } else {
+      context.go(AppRouteNames.dashboardRoute);
+    }
     // String? token = await StorageService().getSessionToken();
     // print(token);
-   
   }
 
   @override

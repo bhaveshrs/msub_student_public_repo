@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:msub/config/common_widgets/tost_msg.dart';
 import 'package:msub/config/network_services/api_result_service.dart';
+import 'package:msub/config/resource/storage_service.dart';
+import 'package:msub/features/signup_verify/models/set_user_response.dart';
 import 'package:msub/features/signup_verify/repo/sign_up_verify_repository.dart';
 
 part 'sign_up_verify_event.dart';
@@ -85,6 +87,11 @@ class SignUpVerifyBloc extends Bloc<SignUpVerifyEvent, SignUpVerifyState> {
           prn: event.prn, email: event.email, password: event.password);
 
       if (response is RepoSuccess) {
+        SetUserResponse setUserResponse = response.data;
+        if (setUserResponse.token != null) {
+          print("setUserResponse.token ${setUserResponse.token}");
+          await StorageService().setSessionToken(setUserResponse.token ?? "");
+        }
         emit(state.copyWith(
             createPasswordStatus: FormzSubmissionStatus.success));
         showCustomToast(response.message!, true);

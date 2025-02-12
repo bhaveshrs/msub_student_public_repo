@@ -118,7 +118,7 @@ class LoginController extends GetxController {
       Get.overlayContext!,
     );
     if (response["status"] == "success") {
-      await CacheService.writeCache(key: Constants.token, value: response["token"]);
+      await CacheService.writeCache(key: Constants.token, value: response['data']["token"]);
       Get.offAll(() => DashboardView());
 
       showSuccessMessage(response["message"]);
