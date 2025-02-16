@@ -57,7 +57,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       RepoResult response = await _signUpRepository.updateUserName(
           prn: event.prn, name: event.name);
       if (response is RepoSuccess) {
-        emit(state.copyWith(updateUserStatus: FormzSubmissionStatus.success));
+        emit(state.copyWith(
+            updateUserStatus: FormzSubmissionStatus.success,
+            name: event.name,
+            prn: event.prn));
         showCustomToast(response.message!, true);
       } else {
         emit(state.copyWith(

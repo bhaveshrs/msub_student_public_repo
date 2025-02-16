@@ -9,6 +9,8 @@ class SignUpVerifyState extends Equatable {
   final bool? startTimerForMobile;
   final bool startTimerForEmail;
   final bool isPasswordCreated;
+  final bool firstTimeMobOtPSent;
+  final bool firstTimeEmailOtPSent;
   final String? error;
 
   const SignUpVerifyState({
@@ -20,6 +22,8 @@ class SignUpVerifyState extends Equatable {
     this.startTimerForMobile = false,
     this.startTimerForEmail = false,
     this.isPasswordCreated = false,
+    this.firstTimeMobOtPSent = false,
+    this.firstTimeEmailOtPSent = false,
     this.error,
   });
 
@@ -32,6 +36,8 @@ class SignUpVerifyState extends Equatable {
     bool? startTimerForMobile,
     bool? startTimerForEmail,
     bool? isPasswordCreated,
+    bool? firstTimeMobOtPSent,
+    bool? firstTimeEmailOtPSent,
     String? error,
   }) {
     return SignUpVerifyState(
@@ -43,6 +49,9 @@ class SignUpVerifyState extends Equatable {
       createPasswordStatus: createPasswordStatus ?? this.createPasswordStatus,
       startTimerForMobile: startTimerForMobile ?? false,
       startTimerForEmail: startTimerForEmail ?? false,
+      firstTimeEmailOtPSent:
+          firstTimeEmailOtPSent ?? this.firstTimeEmailOtPSent,
+      firstTimeMobOtPSent: firstTimeMobOtPSent ?? this.firstTimeMobOtPSent,
       isPasswordCreated: isPasswordCreated ?? this.isPasswordCreated,
       error: error ?? this.error,
     );

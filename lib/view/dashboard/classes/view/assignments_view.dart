@@ -35,11 +35,13 @@ class AssignmentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return 
+    InkWell(
       onTap: () {
         Get.to(() => const AssignmentDetailsView());
       },
-      child: Container(
+      child:
+       Container(
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -139,6 +141,7 @@ class AssignmentTile extends StatelessWidget {
           ],
         ),
       ),
+   
     );
   }
 }

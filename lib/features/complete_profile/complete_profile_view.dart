@@ -208,6 +208,7 @@ import 'package:msub/config/router/route_names.dart';
 import 'package:msub/features/complete_profile/bloc/complete_profile_bloc.dart';
 import 'package:msub/features/complete_profile/models/country_model.dart';
 import 'package:msub/features/complete_profile/models/program_model.dart';
+import 'package:msub/features/signup/bloc/sign_up_bloc.dart';
 
 import '../../config/common_widgets/app_textfild.dart';
 
@@ -238,11 +239,13 @@ class _CompleteProfileViewState extends State<CompleteProfileScreen> {
     context
         .read<CompleteProfileBloc>()
         .add(LoadProfileData()); // Fetch dropdown data
-    if (widget.name != null) {
+    if (context.read<SignUpBloc>().state.name != null) {
+      nameController.text = context.read<SignUpBloc>().state.name!;
+    } else if (widget.name != null) {
       nameController.text = widget.name!;
-      if (mounted) {
-        setState(() {});
-      }
+    }
+    if (mounted) {
+      setState(() {});
     }
   }
 

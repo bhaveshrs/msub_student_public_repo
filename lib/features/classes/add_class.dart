@@ -1,3 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:msub/common/utils/app_colors.dart';
+import 'package:msub/config/common_widgets/app_textfild.dart';
+import 'package:msub/config/common_widgets/apptext.dart';
+import 'package:msub/config/common_widgets/button.dart';
+import 'package:msub/config/resource/app_colors.dart';
+import 'package:msub/config/resource/app_images.dart';
+import 'package:msub/config/resource/app_textstyles.dart';
+
+class AddClass extends StatefulWidget {
+  const AddClass({super.key});
+
+  @override
+  State<AddClass> createState() => _AddClassState();
+}
+
+class _AddClassState extends State<AddClass> {
+  TextEditingController classCodeController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(AppImages.uploadSvg),
+            const SizedBox(
+              width: 5,
+            ),
+            AppText(
+              text: "Upload Classes",
+              style: AppTextStyles.rob16Medium(color: Colors.black),
+            ),
+          ],
+        ),
+      ),
+  
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 30,),
+              Text(
+               
+                 "Ener Class Code",
+                 style: AppTextStyles.rob20Semi(),
+                
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "The class code is provided by your teacher.",
+                style: AppTextStyles.pop12Reg(color: MyAppColors.inActiveText),
+              ),
+              const SizedBox(height: 20),
+             CustomTextInput(controller: classCodeController,hintText: "E.g., ABC123",),
+              const SizedBox(height: 50),
+              AppButton(onPress: () {}, buttonName: "Join Class")
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 // import 'package:animated_custom_dropdown/custom_dropdown.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_svg/svg.dart';
@@ -214,3 +285,4 @@
 //     );
 //   }
 // }
+

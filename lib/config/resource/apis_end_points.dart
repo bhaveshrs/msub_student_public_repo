@@ -6,7 +6,8 @@ class ApisEndPoints {
   static const String resetPass = '/reset_forgetpassword';
   static const String verifyOtp = '/verify_login_otp';
   static const String userLogin = '/user_login';
-  static const String notificationListing = '/teacher_notification_list';
+  static const String notificationListing = '/all_notification_list';
+  // static const String notificationListing = '/teacher_notification_list';
   static const String updateUserName = "/update_user_name";
   static const String getUser = "/get_user";
   static const String sendEmailOtp = "/send_email_otp";

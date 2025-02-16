@@ -32,6 +32,7 @@ class SignUpVerifyBloc extends Bloc<SignUpVerifyEvent, SignUpVerifyState> {
 
       if (response is RepoSuccess) {
         emit(state.copyWith(
+            firstTimeEmailOtPSent: true,
             sendEmailOtpStatus: FormzSubmissionStatus.success,
             startTimerForEmail: true));
         showCustomToast(response.message!, true);
@@ -117,6 +118,7 @@ class SignUpVerifyBloc extends Bloc<SignUpVerifyEvent, SignUpVerifyState> {
         await _repository.sendMobileOtp(prn: event.prn, mobile: event.mobile);
     if (response is RepoSuccess) {
       emit(state.copyWith(
+          firstTimeMobOtPSent: true,
           sendMobileOtpStatus: FormzSubmissionStatus.success,
           startTimerForMobile: true));
       showCustomToast(response.message!, true);

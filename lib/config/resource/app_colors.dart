@@ -28,6 +28,9 @@ class MyAppColors {
   static const darkPurple = Color(0xff7774F6);
   static const textColor = Color(0xff1F1F1F);
   static const msu27AE60 = Color(0xff27AE60);
+  static const msuD4F1FF = Color(0xffD4F1FF);
+  static const msuD8FFD7 = Color(0xffD8FFD7);
+  static const msuFF8503 = Color(0xffFF8503);
 
   static const switchDisableColor = Color(0xffD2D5DA);
 

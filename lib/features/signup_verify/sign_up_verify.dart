@@ -95,7 +95,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
 
             if (state.startTimerForMobile == true) {
               otpTimerText = "0:00";
-              int remainingSeconds = 300;
+              int remainingSeconds = 100;
               setState(() {});
 
               Timer.periodic(const Duration(seconds: 1), (Timer timer) {
@@ -116,7 +116,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
             }
             if (state.startTimerForEmail == true) {
               otpTimerTextForEmail = "0:00";
-              int remainingSeconds = 300;
+              int remainingSeconds = 100;
               setState(() {});
 
               Timer.periodic(const Duration(seconds: 1), (Timer timer) {
@@ -139,7 +139,8 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
           child: BlocBuilder<SignUpVerifyBloc, SignUpVerifyState>(
             builder: (context, state) {
               print(otpTimerText);
-              print(otpTimerTextForEmail);
+              print(state.sendMobileOtpStatus.isInProgress);
+              print(state.verifyMobileOtpStatus.isSuccess);
 
               return SingleChildScrollView(
                 child: Column(
@@ -154,14 +155,14 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    state.sendMobileOtpStatus.isSuccess
+                                    state.firstTimeMobOtPSent
                                         ? "Enter OTP"
                                         : "Verify Mobile Number",
                                     style: AppTextStyles.rob20Semi(),
                                   ),
                                   const Height(height: 16),
                                   Text(
-                                    state.sendMobileOtpStatus.isSuccess
+                                    state.firstTimeMobOtPSent
                                         ? "Please verify your registered Mobile Number"
                                         : "Please verify your registered Mobile Number",
                                     textAlign: TextAlign.center,
@@ -169,7 +170,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                         color: MyAppColors.inActiveText),
                                   ),
                                   const Height(height: 30),
-                                  !state.sendMobileOtpStatus.isSuccess
+                                  !state.firstTimeMobOtPSent
                                       ? CustomTextInput(
                                           hintText: "1234567890",
                                           prefixIcon: Row(
@@ -198,7 +199,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                           showValidationIcons: true,
                                         )
                                       : const SizedBox.shrink(),
-                                  if (state.sendMobileOtpStatus.isSuccess) ...[
+                                  if (state.firstTimeMobOtPSent) ...[
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -260,26 +261,29 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  context
-                                                      .read<SignUpVerifyBloc>()
-                                                      .add(
-                                                        SendMobileOtpEvent(
-                                                            prn: widget
-                                                                .prnNumber,
-                                                            mobile:
-                                                                mobileNumberController
-                                                                    .text),
-                                                      );
-                                                },
-                                                child: const AppText(
-                                                  text: "Resend OTP",
-                                                  textAlign: TextAlign.start,
-                                                  fontSize: 14,
-                                                  color: MyAppColors.blue3,
+                                              if (!state.sendMobileOtpStatus
+                                                  .isInProgress)
+                                                InkWell(
+                                                  onTap: () {
+                                                    context
+                                                        .read<
+                                                            SignUpVerifyBloc>()
+                                                        .add(
+                                                          SendMobileOtpEvent(
+                                                              prn: widget
+                                                                  .prnNumber,
+                                                              mobile:
+                                                                  mobileNumberController
+                                                                      .text),
+                                                        );
+                                                  },
+                                                  child: const AppText(
+                                                    text: "Resend OTP",
+                                                    textAlign: TextAlign.start,
+                                                    fontSize: 14,
+                                                    color: MyAppColors.blue3,
+                                                  ),
                                                 ),
-                                              ),
                                             ],
                                           ),
                                   ]
@@ -292,7 +296,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                           child: Column(
                             children: [
                               Text(
-                                state.sendEmailOtpStatus.isSuccess
+                                state.firstTimeEmailOtPSent
                                     ? "Enter OTP"
                                     : "Verify Email Id",
                                 style: AppTextStyles.rob20Semi(),
@@ -305,7 +309,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                     color: MyAppColors.inActiveText),
                               ),
                               const Height(height: 30),
-                              !state.sendEmailOtpStatus.isSuccess
+                              !state.firstTimeEmailOtPSent
                                   ? CustomTextInput(
                                       controller: emailController,
                                       keyboardType: TextInputType.text,
@@ -346,7 +350,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                       showValidationIcons: true,
                                     )
                                   : const SizedBox.shrink(),
-                              if (state.sendEmailOtpStatus.isSuccess) ...[
+                              if (state.firstTimeEmailOtPSent) ...[
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -405,24 +409,26 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          InkWell(
-                                            onTap: () {
-                                              context
-                                                  .read<SignUpVerifyBloc>()
-                                                  .add(
-                                                    SendEmailOtpEvent(
-                                                        prn: widget.prnNumber,
-                                                        email: emailController
-                                                            .text),
-                                                  );
-                                            },
-                                            child: const AppText(
-                                              text: "Resend OTP",
-                                              textAlign: TextAlign.start,
-                                              fontSize: 14,
-                                              color: MyAppColors.blue3,
+                                          if (!state
+                                              .sendEmailOtpStatus.isInProgress)
+                                            InkWell(
+                                              onTap: () {
+                                                context
+                                                    .read<SignUpVerifyBloc>()
+                                                    .add(
+                                                      SendEmailOtpEvent(
+                                                          prn: widget.prnNumber,
+                                                          email: emailController
+                                                              .text),
+                                                    );
+                                              },
+                                              child: const AppText(
+                                                text: "Resend OTP",
+                                                textAlign: TextAlign.start,
+                                                fontSize: 14,
+                                                color: MyAppColors.blue3,
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                               ]

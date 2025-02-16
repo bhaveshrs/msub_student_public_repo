@@ -7,7 +7,6 @@ import 'package:msub/config/resource/app_images.dart';
 import 'package:msub/config/resource/app_textstyles.dart';
 import 'package:msub/config/router/route_names.dart';
 import 'package:msub/features/home/widgets/announcement_box.dart';
-import 'package:msub/features/home/widgets/class_detail_box.dart';
 import 'package:msub/features/home/widgets/search_history_item.dart';
 import 'package:msub/features/home/widgets/title_more.dart';
 import 'package:msub/features/home/widgets/top_welcom.dart';
@@ -89,7 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
               position: widget.firstColumnAnimation,
               child: Column(
                 children: [
-            
                   TitleMore(
                     title: "Discover",
                     onTap: () {},
@@ -114,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            if (index == 6) {
+                            if (index == 7) {
                               context.pushNamed(AppRouteNames.facultiesScreen);
                             }
                           },

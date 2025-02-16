@@ -13,7 +13,8 @@ class AssignmentDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white2,
-      body: SafeArea(
+      body: 
+      SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,8 @@ class AssignmentDetailsView extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
+              child: 
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -179,6 +181,7 @@ class AssignmentDetailsView extends StatelessWidget {
                 ],
               ),
             ),
+         
           ],
         ),
       ),

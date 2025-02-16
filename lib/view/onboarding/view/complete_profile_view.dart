@@ -16,19 +16,19 @@ import '../../../widgets/size_space.dart';
 class CompleteProfileView extends StatelessWidget {
   CompleteProfileView({super.key});
 
-  final CompleteProfileViewController controller = Get.put(CompleteProfileViewController());
+  final CompleteProfileViewController controller =
+      Get.put(CompleteProfileViewController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          height: Get.height ,
+          height: Get.height,
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
             color: AppColors.white2,
-
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -55,7 +55,8 @@ class CompleteProfileView extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.bottomSheet(chooseImageBottomSheet(controller, context));
+                          Get.bottomSheet(
+                              chooseImageBottomSheet(controller, context));
                         },
                         child: Container(
                           height: 120,
@@ -65,7 +66,8 @@ class CompleteProfileView extends StatelessWidget {
                             color: AppColors.white,
                           ),
                           child: ClipOval(
-                            child: controller.file.value == null || controller.file.value!.path.isEmpty
+                            child: controller.file.value == null ||
+                                    controller.file.value!.path.isEmpty
                                 ? Image.asset(
                                     Assets.logo,
                                     fit: BoxFit.cover,
@@ -134,7 +136,10 @@ class CompleteProfileView extends StatelessWidget {
                 ).paddingOnly(left: 10),
                 const Height(height: 10),
                 Obx(() {
-                  List<String> programmeNames = controller.programmeList.map((program) => program.name ?? "").toSet().toList();
+                  List<String> programmeNames = controller.programmeList
+                      .map((program) => program.name ?? "")
+                      .toSet()
+                      .toList();
 
                   if (!programmeNames.contains(controller.selectedProgram)) {
                     controller.selectedProgram = null;
@@ -143,7 +148,6 @@ class CompleteProfileView extends StatelessWidget {
                   return CustomDropdown(
                     items: programmeNames,
                     hintText: 'Select',
-
                     selectedItem: controller.selectedProgram,
                     onChanged: (value) {
                       controller.selectedProgram = value;
@@ -151,7 +155,8 @@ class CompleteProfileView extends StatelessWidget {
                       final selectedItem = controller.programmeList.firstWhere(
                         (program) => program.name == value,
                       );
-                      controller.selectedProgrammer.value = "${selectedItem.id}";
+                      controller.selectedProgrammer.value =
+                          "${selectedItem.id}";
 
                       log("Selected Country ID: ${selectedItem.id}");
                     },
@@ -169,7 +174,10 @@ class CompleteProfileView extends StatelessWidget {
                 ).paddingOnly(left: 10),
                 const Height(height: 10),
                 Obx(() {
-                  List<String> years = controller.yearList.map((year) => year.year.toString() ?? "").toSet().toList();
+                  List<String> years = controller.yearList
+                      .map((year) => year.year.toString() ?? "")
+                      .toSet()
+                      .toList();
 
                   if (!years.contains(controller.selectedYear)) {
                     controller.selectedYear = null;
@@ -185,7 +193,8 @@ class CompleteProfileView extends StatelessWidget {
                       final selectedItem = controller.yearList.firstWhere(
                         (year) => year.year == value,
                       );
-                      controller.selectedYearDropDown.value = "${selectedItem.id}";
+                      controller.selectedYearDropDown.value =
+                          "${selectedItem.id}";
                       controller.selectedYearId = "${selectedItem.id}";
                       log("Selected Country ID: ${controller.selectedYearId}");
                     },
@@ -231,10 +240,10 @@ class CompleteProfileView extends StatelessWidget {
                                 }
                                 return null;
                               },
-                         //     successMessage: "Vaild PRN",
-                            //  errorMessage: "Please enter a valid PRN.",
+                              //     successMessage: "Vaild PRN",
+                              //  errorMessage: "Please enter a valid PRN.",
                               validateOnInputChange: true,
-                          //    showValidationIcons: true,
+                              //    showValidationIcons: true,
                             ),
                           ),
                         ],
@@ -262,7 +271,6 @@ class CompleteProfileView extends StatelessWidget {
                               controller.selectedGender = value;
                             },
                           ),
-
                           const Height(height: 10),
                         ],
                       ),
@@ -281,7 +289,10 @@ class CompleteProfileView extends StatelessWidget {
                 ).paddingOnly(left: 10),
                 const Height(height: 10),
                 Obx(() {
-                  List<String> countryNames = controller.countriesList.map((country) => country.name ?? "").toSet().toList();
+                  List<String> countryNames = controller.countriesList
+                      .map((country) => country.name ?? "")
+                      .toSet()
+                      .toList();
 
                   if (!countryNames.contains(controller.selectedCountries)) {
                     controller.selectedCountries = null;
@@ -315,7 +326,10 @@ class CompleteProfileView extends StatelessWidget {
                 ).paddingOnly(left: 10),
                 const Height(height: 10),
                 Obx(() {
-                  List<String> countryNames = controller.nationalityList.map((country) => country.name ?? "").toSet().toList();
+                  List<String> countryNames = controller.nationalityList
+                      .map((country) => country.name ?? "")
+                      .toSet()
+                      .toList();
 
                   if (!countryNames.contains(controller.selectedNationality)) {
                     controller.selectedNationality = null;
@@ -331,7 +345,8 @@ class CompleteProfileView extends StatelessWidget {
                       final selectedItem = controller.countriesList.firstWhere(
                         (country) => country.name == value,
                       );
-                      controller.selectedNationalityDropdown.value = "${selectedItem.id}";
+                      controller.selectedNationalityDropdown.value =
+                          "${selectedItem.id}";
 
                       log("Selected Country ID: ${selectedItem.id}");
                     },
@@ -424,8 +439,12 @@ class CompleteProfileView extends StatelessWidget {
                           },
                           title: "Sign Up",
                           fontSize: 20,
-                          bgColor: !controller.isUserIdEmpty.value ? AppColors.inActive : AppColors.primary,
-                          borderColor: !controller.isUserIdEmpty.value ? AppColors.inActive : AppColors.primary,
+                          bgColor: !controller.isUserIdEmpty.value
+                              ? AppColors.inActive
+                              : AppColors.primary,
+                          borderColor: !controller.isUserIdEmpty.value
+                              ? AppColors.inActive
+                              : AppColors.primary,
                           fontWeight: FontWeight.w600,
                           borderRadius: BorderRadius.circular(20),
                         );
@@ -438,7 +457,8 @@ class CompleteProfileView extends StatelessWidget {
     );
   }
 
-  Widget chooseImageBottomSheet(CompleteProfileViewController controller, BuildContext context) {
+  Widget chooseImageBottomSheet(
+      CompleteProfileViewController controller, BuildContext context) {
     return Container(
       width: Get.width * 1,
       height: 100,

@@ -76,6 +76,14 @@ class AppTextStyles {
       fontFamily: "Poppins",
     );
   }
+  static TextStyle pop16Semi({Color? color}) {
+    return TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: color,
+      fontFamily: "Poppins",
+    );
+  }
 
   static TextStyle pop18Semi({Color? color}) {
     return TextStyle(

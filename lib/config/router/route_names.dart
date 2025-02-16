@@ -13,6 +13,7 @@ class AppRouteNames {
   // static const String homeRoute = '/home';
   static const String dashboardRoute = '/dashBoard';
   static const String classDetailsRoute = '/class-details';
+  static const String assignmentDetailsRoute = '/assignment-details';
   static const String addAssignmentRoute = '/add-assignment';
   static const String addClassRoute = '/add-class';
   static const String homeRoute = '/home';
