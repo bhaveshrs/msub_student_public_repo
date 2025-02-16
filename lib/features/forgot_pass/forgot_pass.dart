@@ -155,10 +155,7 @@ class _ForgotPassState extends State<ForgotPass> {
                                 maxLines: 1,
                                 textAlignment: TextAlign.start,
                                 onChanged: (value) {
-                               
-
-                                    setState(() {});
-
+                                  setState(() {});
                                 },
                                 controller: prnController,
                                 keyboardType: TextInputType.text,
@@ -209,9 +206,7 @@ class _ForgotPassState extends State<ForgotPass> {
                                 maxLines: 1,
                                 textAlignment: TextAlign.start,
                                 onChanged: (value) {
-                                
-                                    setState(() {});
-                               
+                                  setState(() {});
                                 },
                                 controller: emailController,
                                 keyboardType: TextInputType.text,
@@ -347,11 +342,11 @@ class _ForgotPassState extends State<ForgotPass> {
                                               (!state.sendEmailOtpStatus
                                                       .isSuccess &&
                                                   emailController
-                                                      .text.isNotEmpty && prnController.text.isNotEmpty)
+                                                      .text.isNotEmpty &&
+                                                  prnController.text.isNotEmpty)
                                           ? MyAppColors.blue3
                                           : MyAppColors.inActiveBtn,
                                   onPress: () {
-
                                     if (!state.verifyOtpStatus.isSuccess) {
                                       if (state.sendEmailOtpStatus.isSuccess &&
                                           otpController.text.length >= 4) {
@@ -360,11 +355,12 @@ class _ForgotPassState extends State<ForgotPass> {
                                                 otp: otpController.text));
                                       } else if (!state
                                               .sendEmailOtpStatus.isSuccess &&
-                                          emailController.text.isNotEmpty && prnController.text.isNotEmpty) {
+                                          emailController.text.isNotEmpty &&
+                                          prnController.text.isNotEmpty) {
                                         context.read<ForgotPassBloc>().add(
                                             SentForgotPassOtpEvent(
                                                 email: emailController.text,
-                                                empId: "emp1234567"));
+                                                empId: prnController.text));
                                       }
                                     }
                                   },
@@ -382,7 +378,10 @@ class _ForgotPassState extends State<ForgotPass> {
                                 if (state.verifyOtpStatus.isSuccess) {
                                   context.pushNamed(
                                     AppRouteNames.createNewPassRoute,
-                                    extra: {'email': state.email},
+                                    extra: {
+                                      'email': state.email,
+                                      'prn': prnController.text
+                                    },
                                   );
                                 }
                               },

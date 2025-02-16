@@ -10,6 +10,7 @@ import 'package:msub/features/classes/class_details.dart';
 import 'package:msub/features/complete_profile/complete_profile_view.dart';
 import 'package:msub/features/dashboard/dashbord.dart';
 import 'package:msub/features/facilities/facilities.dart';
+import 'package:msub/features/forgot_pass/create_newpass.dart';
 import 'package:msub/features/forgot_pass/forgot_pass.dart';
 import 'package:msub/features/help_and_support/help_support.dart';
 import 'package:msub/features/help_and_support/report_issue.dart';
@@ -153,18 +154,21 @@ class AppRouter {
       //     child: const CompleteProfileScreen(),
       //   );
       // }),
-      // GoRoute(
-      //   path: AppRouteNames.createNewPassRoute,
-      //   name: AppRouteNames.createNewPassRoute,
-      //   pageBuilder: (context, state) => MaterialPage(
-      //     key: state.pageKey,
-      //     child: CreateNewPass(
-      //       email: (state.extra as Map).containsKey('email')
-      //           ? ((state.extra as Map)['email'] as String)
-      //           : null,
-      //     ),
-      //   ),
-      // ),
+      GoRoute(
+        path: AppRouteNames.createNewPassRoute,
+        name: AppRouteNames.createNewPassRoute,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: CreateNewPass(
+            email: (state.extra as Map).containsKey('email')
+                ? ((state.extra as Map)['email'] as String)
+                : null,
+            prn: (state.extra as Map).containsKey('prn')
+                ? ((state.extra as Map)['prn'] as String)
+                : null,
+          ),
+        ),
+      ),
       GoRoute(
         path: AppRouteNames.dashboardRoute,
         name: AppRouteNames.dashboardRoute,

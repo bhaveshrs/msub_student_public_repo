@@ -32,11 +32,12 @@ class OtpVerifyEvent extends ForgotPassEvent {
 }
 
 class ResetPassEvent extends ForgotPassEvent {
-  const ResetPassEvent({required this.password, required this.email});
+  const ResetPassEvent({required this.password, required this.email,required this.prn});
 
   final String password;
   final String email;
+  final String prn;
 
   @override
-  List<Object> get props => [password, email];
+  List<Object> get props => [password, email, prn];
 }

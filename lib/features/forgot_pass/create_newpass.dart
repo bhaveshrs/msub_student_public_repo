@@ -17,7 +17,8 @@ import 'package:pinput/pinput.dart';
 
 class CreateNewPass extends StatefulWidget {
   final String? email;
-  const CreateNewPass({super.key, required this.email});
+  final String? prn;
+  const CreateNewPass({super.key, required this.email, required this.prn});
 
   @override
   State<CreateNewPass> createState() => _CreateStateNewPass();
@@ -282,6 +283,7 @@ class _CreateStateNewPass extends State<CreateNewPass> {
                                   context.read<ForgotPassBloc>().add(
                                       ResetPassEvent(
                                           email: widget.email ?? "",
+                                          prn: widget.prn ?? "",
                                           password: passController.text));
                                 }
                               },

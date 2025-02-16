@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:msub/config/common_widgets/tost_msg.dart';
 import 'package:msub/config/network_services/api_result_service.dart';
 import 'package:msub/features/forgot_pass/repo/forgotpass_repo.dart';
+
 // import 'package:teachers_app/config/common_widgets/tost_msg.dart';
 // import 'package:teachers_app/config/network_services/api_result_service.dart';
 // import 'package:teachers_app/features/forgot_pass/repo/forgotpass_repo.dart';
@@ -33,7 +34,6 @@ class ForgotPassBloc extends Bloc<ForgotPassEvent, ForgotPassState> {
               startFillOtp: true,
               startTimer: true));
           if (response.message != null && response.message != "") {
-
             showCustomToast(response.message!, true);
           }
         } else {
@@ -124,6 +124,7 @@ class ForgotPassBloc extends Bloc<ForgotPassEvent, ForgotPassState> {
             payload: json.encode({
           "email": event.email,
           "password": event.password,
+          "prn_employee_id": event.prn
         }));
         print(response);
         if (response is RepoSuccess) {
